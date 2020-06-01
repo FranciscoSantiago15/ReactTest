@@ -2,8 +2,13 @@ import React from 'react';
 import './App.css';
 import MicRecorder from 'mic-recorder-to-mp3';
 import AWS from 'aws-sdk';
+import TranscribeFetch from './getTranscribeStatus'
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 
 
 var bucketName = "proj-es-s3/Voice";
@@ -96,7 +101,8 @@ class App extends React.Component {
         return alert("ERROR: ", err.message);
       }
     )
-
+    window.location.reload(true);
+    sleep(3000);
   }
 
   render(){
@@ -104,8 +110,11 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>
-          <audio src={this.state.blobURL} controls="controls" />
+          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>   
+          <h3>
+            Results:
+            <TranscribeFetch />
+          </h3>
         </header>
       </div>
     );

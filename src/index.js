@@ -5,7 +5,10 @@ import Page from './counter';
 import App from './App';
 //import Home from './uploadS3_v2';
 //import Home from './uploadS3';
+import TranscribeFetch from './getTranscribeStatus';
+import TranscribeData from './getTranscribeData';
 import * as serviceWorker from './serviceWorker';
+
 
 
 
