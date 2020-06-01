@@ -95,8 +95,8 @@ class App extends React.Component {
 
     promise.then(
       function(data) {
-        sleep(3000).then(() => {
-          alert("Audio inserido para Transcriçao");
+        alert("Audio inserido para Transcriçao");
+        sleep(3000).then(() => {          
           window.location.reload(false);  
         })              
       },
