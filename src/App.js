@@ -6,10 +6,10 @@ import TranscribeFetch from './getTranscribeStatus'
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
+
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
-
 
 var bucketName = "proj-es-s3/Voice";
 var bucketRegion = "us-east-1";
@@ -95,24 +95,25 @@ class App extends React.Component {
 
     promise.then(
       function(data) {
-        alert("Audio inserido na Storage");
+        sleep(5000);
+        alert("Audio inserido para Transcriçao");
+        window.location.reload(false);        
       },
       function(err) {
         return alert("ERROR: ", err.message);
       }
     )
-    window.location.reload(true);
-    sleep(3000);
   }
 
   render(){
-    return (
+    return (      
       <div className="App">
+        {this.props.callApi}
         <header className="App-header">
           <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>   
+          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button> 
           <h3>
-            Results:
+            Resuts:
             <TranscribeFetch />
           </h3>
         </header>

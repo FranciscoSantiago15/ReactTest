@@ -2,12 +2,12 @@ import React from 'react';
 import TranscribeData from './getTranscribeData'
 
 
-
-
 class TranscribeFetch extends React.Component {
+
     constructor(props){
         super(props);
         this.state = {
+            aux: 0,
             body: '',
             isLoading: true
         };
@@ -22,10 +22,18 @@ class TranscribeFetch extends React.Component {
         console.log(this.state.body);
 
         if(this.state.body === String('"IN_PROGRESS"')) {
-            this.setState({ isLoading: true })
+            this.setState({ aux: 0, isLoading: true })
             this.componentDidMount();
         } else {
-            this.setState({ isLoading: false })
+            /*if(this.state.aux === 0) {
+                console.log("1111")
+                this.setState({ aux:1 })
+                console.log(this.state.aux);
+            } else {
+                console.log("2222")
+                this.setState({ isLoading: false });
+            }    */
+            this.setState({ isLoading: false })      
         }
     }    
 
