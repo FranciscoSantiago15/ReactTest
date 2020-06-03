@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDom from 'react-dom';
+import App from './App'
 
 class Login extends React.Component {
     constructor(props) {
@@ -58,7 +59,7 @@ class Watch extends React.Component {
 }
 
 
-class Page extends React.Component {
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {token : undefined, errormessage : undefined };
@@ -114,12 +115,15 @@ class Page extends React.Component {
             )
         else
             return (
+                <App recordAudio={this.props.recordAudio} token={this.state.token}/>
+                /*
                 <div>
                     {errormessage}
                     <Watch timeserver={this.props.timeserver} token={this.state.token}/>
                 </div>
+                */
             )
     }
 }
 
-export default Page;
+export default LoginPage;

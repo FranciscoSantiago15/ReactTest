@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Page from './counter';
 import App from './App';
 //import Home from './uploadS3_v2';
 //import Home from './uploadS3';
+import LoginPage from './LoginPage';
 import TranscribeFetch from './getTranscribeStatus';
 import TranscribeData from './getTranscribeData';
 import * as serviceWorker from './serviceWorker';
@@ -13,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
-    //<Page loginserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/login" timeserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/time"/>,
+    //<LoginPage loginserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/login" timeserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/time"/>,
     <App />,
   document.getElementById('root')
 );

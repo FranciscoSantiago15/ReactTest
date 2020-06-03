@@ -17,7 +17,7 @@ class TranscribeFetch extends React.Component {
         const url = "https://3xeam2g64j.execute-api.us-east-1.amazonaws.com/transcribe/getstatus";
         const response = await fetch(url)
         const data = await response.json();
-        //console.log(data);
+       // console.log(data);
         this.setState({ body: data.body })
         console.log(this.state.body);
 
@@ -27,12 +27,12 @@ class TranscribeFetch extends React.Component {
         } else {
             /*if(this.state.aux === 0) {
                 console.log("1111")
-                this.setState({ aux:1 })
+                this.setState({ aux: 1 })
                 console.log(this.state.aux);
             } else {
                 console.log("2222")
                 this.setState({ isLoading: false });
-            }    */
+            }  */  
             this.setState({ isLoading: false })      
         }
     }    

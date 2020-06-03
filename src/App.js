@@ -3,6 +3,7 @@ import './App.css';
 import MicRecorder from 'mic-recorder-to-mp3';
 import AWS from 'aws-sdk';
 import TranscribeFetch from './getTranscribeStatus'
+import TranscribeData from './getTranscribeData'
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
@@ -95,10 +96,10 @@ class App extends React.Component {
 
     promise.then(
       function(data) {
-        alert("Audio inserido para Transcriçao");
-        sleep(3000).then(() => {          
-          window.location.reload(false);  
-        })              
+        sleep(3000).then(() => {   
+          alert("Audio inserido para Transcriçao");       
+          //window.location.reload(false);  
+        })           
       },
       function(err) {
         return alert("ERROR: ", err.message);
@@ -106,15 +107,16 @@ class App extends React.Component {
     )
   }
 
+
   render(){
     return (      
       <div className="App">
-        {this.props.callApi}
         <header className="App-header">
           <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
           <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button> 
+          <audio src={this.state.blobURL} controls="controls" />
           <h3>
-            Resuts:
+            Results:
             <TranscribeFetch />
           </h3>
         </header>
