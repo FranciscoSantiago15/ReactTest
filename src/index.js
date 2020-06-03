@@ -13,8 +13,8 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
-    //<LoginPage loginserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/login" timeserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/time"/>,
-    <App />,
+    <LoginPage loginserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/login" timeserver="https://4xfwd1debf.execute-api.us-east-1.amazonaws.com/test/time"/>,
+    //<App />,
   document.getElementById('root')
 );
 

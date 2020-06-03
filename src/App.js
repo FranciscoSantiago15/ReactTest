@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 import MicRecorder from 'mic-recorder-to-mp3';
 import AWS from 'aws-sdk';
+import SearchLocation from './SearchLocation';
+import AddressItem from './AddressItem';
+import AddressForm from './AddressForm';
 import TranscribeFetch from './getTranscribeStatus'
 import TranscribeData from './getTranscribeData'
 
@@ -29,6 +32,17 @@ var s3 = new AWS.S3({
   params: { Bucket: bucketName }
 });
 
+function SearchLocationPage(props) {
+  if (!props.pesq) {
+    return null;
+  }
+  return (
+    <div className="container">
+      <AddressForm/>
+    </div>
+  );
+}
+
 
 class App extends React.Component {
   constructor(props){
@@ -37,6 +51,7 @@ class App extends React.Component {
       isRecording: false,
       blobURL: '',
       isBlocked: false,
+      aux: false,
     };
   }
 
@@ -96,9 +111,9 @@ class App extends React.Component {
 
     promise.then(
       function(data) {
-        sleep(3000).then(() => {   
-          alert("Audio inserido para Transcriçao");       
-          //window.location.reload(false);  
+        alert("Audio inserido para Transcriçao");
+        sleep(3000).then(() => {
+          alert("Ja pode ir buscar a localização")
         })           
       },
       function(err) {
@@ -107,21 +122,46 @@ class App extends React.Component {
     )
   }
 
+  showTranscribe(){
+    this.setState({ aux: true });
+  }
+
 
   render(){
-    return (      
-      <div className="App">
-        <header className="App-header">
-          <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button> 
-          <audio src={this.state.blobURL} controls="controls" />
-          <h3>
-            Results:
-            <TranscribeFetch />
-          </h3>
-        </header>
-      </div>
-    );
+    if(!this.state.aux){
+      return (  
+        <div className="App">
+          <header className="App-header">
+            <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
+            <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button> 
+            <audio src={this.state.blobURL} controls="controls" />
+            <h3>
+              <button onClick={this.showTranscribe.bind(this)}>Get Location</button>
+            </h3>
+          </header>
+        </div>
+      );
+    } else {
+      return(
+        <div className="App">
+          <header className="App-header">
+            <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
+            <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button> 
+            <audio src={this.state.blobURL} controls="controls" />
+            <h3>
+              Results:
+              <TranscribeFetch />
+            </h3>
+            <h4>
+            <SearchLocationPage pesq = {this.state.showSearchLocation}/>
+             <button onClick={this.goSearch}> Introduzir endereco!</button>
+            </h4>
+          </header>
+        </div> 
+      )
+          
+    }
+    
   }
 }
 
